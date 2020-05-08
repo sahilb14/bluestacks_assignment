@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body >
-    <div class="jumbotron">
+    <div class="jumbotron" >
         <center><h1>TOP Free Selling Apps On Play Store</h1>
             <a href="{% url 'scrape' %}" class="btn btn-success">Get The Apps </a>
         </form>
@@ -14,11 +14,15 @@
             <div class="row"> 
     {% for object in object_list %}
 <div class="card border-0 col-md-4  " > 
-                              <a href="{{object.url}}">
-                    <img class="img-circle"  style=" padding: 100px ; border-radius: 40% ; background : #e8edff;" src= "{{object.image}}"> 
+                              <a href="{%url 'details' object.id%}" >
+                                 <img class="img-circle"  style=" padding: 45px ; border-radius: 40% ; background : #33333326; box-shadow: 0 .25rem .25rem rgba(0,0,0,0.2),
+    0 0 1rem rgba(0,0,0,0.2);" src= "{{object.image}}"> 
   
                         
-                        <h3 class="card-title" style="text-align: center; color: black; font-size:20px;  ">{{object.title}}</h3></img> </a>
+                                  <h3 class="card-title" style="   color: black; font-size:20px; padding: 55px; font-family:  'Helvetica', 'Arial', sans-serif;  ">{{object.title}}</h3> 
+
+                      
+                      </a>
                          
                    
                 </div> 

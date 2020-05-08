@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body >
+  <div class="container" style="display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #44444429;">
+  <div class="card" style="position: relative;
+  background: #33333338;
+  width: 950px;
+  height: 100%;
+  border-radius: 6px;
+  padding: 0rem;
+  color: #aaa;
+  box-shadow: 0 .25rem .25rem rgba(0,0,0,0.2),
+    0 0 1rem rgba(0,0,0,0.2);
+  overflow: hidden;">
+     <div class="card__image-container flex" style="margin: -2rem -2rem 1rem -2rem;">
+       <img class="card__image" src="{{item.image}}"  style="padding: 43px;">
+
+    </div>
+      
+     
+    
+     <div class="card__content" >
+       <h1 class="card__title" style="color: black;
+    margin-top: 0;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    font-family:  'Helvetica', 'Arial', sans-serif;
+    font-size: 18px">{{item.title}}</h1>
+    <div class = "desc" style="font-size: 12px; font-family:  'Helvetica', 'Arial', sans-serif; color: black; padding: 10px;">
+     <p>{{item.description}}</p>
+    </div>
+  </div>
+
+
+
+   <div class="card__content flex-row " style="width: 100%; ">
+        <div class="card__image-container " >
+       <img class="mdl-card flex-space-around" src="{{item.screenshot_link_1}}"  style="width: 25%;height: 30%; padding: 30px;">
+       <img class="mdl-card" src="{{item.screenshot_link_2}}"  style="width: 25%;height: 40%;padding:30px;">
+       <img class="mdl-card" src="{{item.screenshot_link_3}}"  style="width: 25%;height: 40%;padding: 30px;">
+
+    </div>
+      
+    
+  </div>
+
+
+
+</div>
+
+    <script
+src="http://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
