@@ -4,7 +4,7 @@
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
+<body >
     <div class="jumbotron">
         <center><h1>TOP Free Selling Apps On Play Store</h1>
             <a href="{% url 'scrape' %}" class="btn btn-success">Get The Apps </a>
@@ -13,12 +13,12 @@
     </div>
             <div class="row"> 
     {% for object in object_list %}
-<div class="card border-0 col-md-4 "> 
+<div class="card border-0 col-md-4  " > 
                               <a href="{{object.url}}">
-                    <img class="card-img-top"  style="padding:140px;" src= "{{object.image}}"> 
+                    <img class="img-circle"  style=" padding: 100px ; border-radius: 40% ; background : #e8edff;" src= "{{object.image}}"> 
   
                         
-                        <h3 class="card-title" style="text-align: center;  ">{{object.title}}</h3> </a>
+                        <h3 class="card-title" style="text-align: center; color: black; font-size:20px;  ">{{object.title}}</h3></img> </a>
                          
                    
                 </div> 
