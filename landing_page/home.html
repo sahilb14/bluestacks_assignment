@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="jumbotron">
+        <center><h1>TOP Free Selling Apps On Play Store</h1>
+            <a href="{% url 'scrape' %}" class="btn btn-success">Get The Apps </a>
+        </form>
+    </center>
+    </div>
+  <div class="card-columns" style="padding: 10px; margin: 20px;">
+    {% for object in object_list %}
+     <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone mdl-shadow--4dp">
+              <div class="mdl-grid mdl-grid--no-spacing">
+                <div class="mdl-cell mdl-cell--6-col green">
+                    <img class="card-img-top" style="padding:140px;" src = "{{ object.image }}">
+                </div>
+                <div class="mdl-card-wide mdl-cell mdl-cell--6-col mdl-shadow">
+                  <div class="mdl-card__supporting-text">
+                     <a href="{{object.url}}"><h5 class="card-title">{{object.title}}</h5></a>
+                    
+                  </div>  
+                </div>
+              </div>
+            </div>
+  {% endfor %}
+</div>
+</div>
+    <script
+src="http://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
