@@ -31,10 +31,11 @@ def scrape(request):
 		r = requests.get(url) 
 		all_data = r.content
 	except :
-			pass
+			print("error in requesting data")
 	soup = BSoup(all_data , "html.parser")
 	
 	tags = soup.find_all('div' , {'class':"b8cIId ReQCgd Q9MA7b"})
+	tags = set(tags)
 	
 	
 	for tag in tags :
@@ -48,10 +49,11 @@ def scrape(request):
 		google_play_id = link.split("=")
 		google_id = google_play_id[1]
 		app.google_play_id = google_id
+
 		url_2 = "https://play.google.com" + link	
-	
+
 		app.slug = url_2
-		
+	
 		check_if_present = duplicate_check(url_2)
 		if check_if_present:
 			continue
@@ -66,10 +68,10 @@ def scrape(request):
 		screenshot_links_tag = soup_2.find_all('img', {'class' : "T75of DYfLw"})
 		count = 0
 		screenshot_link_list = []
-	
+
 		for screenshot in screenshot_links_tag :
+	
 		
-			
 			count = count+1
 			try :
 				if screenshot['src'] :
@@ -81,7 +83,7 @@ def scrape(request):
 		app.screenshot_link_1 = screenshot_link_list[0]
 		app.screenshot_link_2 = screenshot_link_list[1]
 		app.screenshot_link_3 = screenshot_link_list[2]
-			
+		
 
 		description_tag = soup_2.find_all('meta',{'itemprop':"description"})[0]
 		app.description = description_tag["content"]
@@ -114,10 +116,19 @@ def duplicate_check(links):
 
 
 
-def details_view(request , object_id):
+def details_view(request,object_id):
 	
 	app_specific = App.objects.get(id = object_id)
-	print(app_specific.title , app_specific.image , app_specific.slug ,app_specific.screenshot_link_1
-		,app_specific.screenshot_link_2,app_specific.screenshot_link_3)
+
+	
 	context = {'item' : app_specific}
 	return render(request , "details_view.html", context = context)
+
+
+
+def details_redirect(request):
+	
+	url_parameter = request.GET.get("app")
+	app_specific = App.objects.get(google_play_id = url_parameter)
+	context = {'item':app_specific}
+	return render(request , "details_view.html" ,context =context) 
