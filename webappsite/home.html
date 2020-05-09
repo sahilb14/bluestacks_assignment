@@ -4,23 +4,27 @@
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
+<body >
     <div class="jumbotron">
         <center><h1>TOP Free Selling Apps On Play Store</h1>
             <a href="{% url 'scrape' %}" class="btn btn-success">Get The Apps </a>
         </form>
     </center>
     </div>
-  <div class="card-columns" style="padding: 10px; margin: 20px;">
+            <div class="row"> 
     {% for object in object_list %}
-    <div class="card" style="width: 18rem;border:5px black solid;">
-  <img class="card-img-top" src = "{{ object.image }}">
-  <div class="card-body">
-    <h5 class="card-title"><div class="card-body">
-      <a href="{{object.url}}"><h5 class="card-title">{{object.title}}</h5></a>
-    </div></h5>
-    </div>
-  </div>
+<div class="card border-0 col-md-4  " > 
+                              <a href="{%url 'details' object.id%}">
+                                 <img class="img-circle"  style=" padding: 45px ; border-radius: 40% ; background : #e8edff;" src= "{{object.image}}"> 
+  
+                        
+                                  <h3 class="card-title" style="   color: black; font-size:20px; padding: 55px; font-family: serif;  ">{{object.title}}</h3> 
+
+                      
+                      </a>
+                         
+                   
+                </div> 
   {% endfor %}
 </div>
 </div>

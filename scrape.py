@@ -21,6 +21,9 @@ soup = BSoup(all_data , "html.parser")
 #print(soup.prettify())
 #pdb.set_trace()
 tags = soup.find_all('div' , {'class':"b8cIId ReQCgd Q9MA7b"})
+print(tags)
+tags = set(tags)
+print(tags)
 #pdb.set_trace()
 for tag in tags :
 	#pdb.set_trace()
@@ -33,7 +36,7 @@ for tag in tags :
 	r_2 = requests.get(url_2)
 	app_data = r_2.content
 	soup_2 = BSoup(app_data , "html.parser")
-	pdb.set_trace()
+	#pdb.set_trace()
 	image_tag = soup_2.find_all('img' , {'class':"T75of sHb2Xb"})[0]
 	image_icon_link = image_tag['src']
 	screenshot_links_tag = soup_2.find_all('img', {'class' : "T75of DYfLw"})
