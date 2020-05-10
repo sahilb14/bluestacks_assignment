@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body >
-  <div class="container" style="display: flex;
+  <div class="container flex" style="display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
@@ -20,21 +20,40 @@
   box-shadow: 0 .25rem .25rem rgba(0,0,0,0.2),
     0 0 1rem rgba(0,0,0,0.2);
   overflow: hidden;">
-     <div class="card__image-container flex" style="margin: -2rem -2rem 1rem -2rem;">
-       <img class="card__image" src="{{item.image}}"  style="padding: 43px;">
-
-    </div>
-      
-     
-    
-     <div class="card__content" >
-       <h1 class="card__title" style="color: black;
-    margin-top: 0;
+     <div class="card__image-container flex-row" style="margin: -2rem -2rem 1rem -2rem;">
+       <img class="card__image" src="{{item.image}}"  style="padding: 43px; width:40%">
+       <div class = "container text-right" style="color: black;
+    margin-top: -300px;
     font-weight: 500;
     letter-spacing: 0.01em;
     font-family:  'Helvetica', 'Arial', sans-serif;
-    font-size: 18px">{{item.title}}</h1>
-    <div class = "desc" style="font-size: 12px; font-family:  'Helvetica', 'Arial', sans-serif; color: black; padding: 10px;">
+    font-size: 12px ;width: 50%">
+         
+     
+       <p class="title" style="font-size: 16px;font-style: bold">{{item.title}}</p>
+        <p >Size :{{item.size}}</p>
+         <p >Genre :{{item.genre}}</p>
+          <p  >Ratings :{{item.ratings}}</p>
+          <p >Android Version :{{item.androidVersion}}</p>
+   <p  >Release Date:{{item.release_date}}</p>
+    <p >Developed By :{{item.developer_name}}</p>
+ 
+
+   
+      
+
+
+             
+
+    </div>
+       </div>
+
+
+       
+     
+    
+     <div class="card__content" >
+      <div class = "desc" style="font-size: 12px; font-family:  'Helvetica', 'Arial', sans-serif; color: black; padding: 10px;">
      <p>{{item.description}}</p>
     </div>
   </div>
@@ -44,14 +63,28 @@
    <div class="card__content flex-row " style="width: 100%; ">
         <div class="card__image-container " >
        <img class="mdl-card flex-space-around" src="{{item.screenshot_link_1}}"  style="width: 25%;height: 30%; padding: 30px;">
-       <img class="mdl-card" src="{{item.screenshot_link_2}}"  style="width: 25%;height: 40%;padding:30px;">
-       <img class="mdl-card" src="{{item.screenshot_link_3}}"  style="width: 25%;height: 40%;padding: 30px;">
+       <img class="mdl-card flex-space-around" src="{{item.screenshot_link_2}}"  style="width: 25%;height: 40%;padding:30px;">
+       <img class="mdl-card flex-space-around" src="{{item.screenshot_link_3}}"  style="width: 25%;height: 40%;padding: 30px;">
 
     </div>
       
     
   </div>
 
+
+
+   <div class="card__content flex-row " style="width: 100% ;color: black;
+    margin-top: 0;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    font-family:  'Helvetica', 'Arial', sans-serif;
+    font-size: 14px ">
+   <p>Here are TOP 3 Reviews </p>
+   <ul>
+     <li>{{item.review_1}}</li>
+     <li>{{item.review_2}}</li>
+     <li>{{item.review_3}}</li>
+   </ul>
 
 
 </div>

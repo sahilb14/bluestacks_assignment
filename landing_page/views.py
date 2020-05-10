@@ -2,9 +2,10 @@ import requests
 from bs4 import BeautifulSoup as BSoup
 import pdb 
 import json
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , reverse
 import urllib.request
 from .models import App
+from google_play_scraper import app , Sort , reviews
 
 
 
@@ -39,55 +40,66 @@ def scrape(request):
 	
 	
 	for tag in tags :
+		try :
+			#pdb.set_trace()
 		
-		app = App()
-		main = tag.find_all('a')[0]
-		title = tag.find_all('div' , {'class' :"WsMG1c nnK0zc"})[0]
-		app.title = title['title']
-
-		link = main['href']
-		google_play_id = link.split("=")
-		google_id = google_play_id[1]
-		app.google_play_id = google_id
-
-		url_2 = "https://play.google.com" + link	
-
-		app.slug = url_2
-	
-		check_if_present = duplicate_check(url_2)
-		if check_if_present:
-			continue
-
-		r_2 = requests.get(url_2)
-		app_data = r_2.content
-		soup_2 = BSoup(app_data , "html.parser")
-
-		image_tag = soup_2.find_all('img' , {'class':"T75of sHb2Xb"})[0]
-		image_icon_link = image_tag['src']
-		app.image = image_icon_link
-		screenshot_links_tag = soup_2.find_all('img', {'class' : "T75of DYfLw"})
-		count = 0
-		screenshot_link_list = []
-
-		for screenshot in screenshot_links_tag :
-	
-		
-			count = count+1
+			db_app = App()
+			main = tag.find_all('a')[0]
+			link = main['href']
+			google_play_id = link.split("=")
+			google_id = google_play_id[1]
+			#print(google_id)
+			app_details = app(google_id)
+			
+			db_app.title = app_details["title"]
+			db_app.google_play_id = app_details["appId"]
+			check_if_present = duplicate_check(app_details["title"])
+			if check_if_present :
+				print("duplicate found")
+				continue
+			db_app.url = app_details["url"]
+			db_app.ratings = app_details["score"]
+			db_app.description = app_details["description"]
+			db_app.size = app_details["size"]
+			db_app.developer_name = app_details["developer"]
+			db_app.image = app_details["icon"]
+			db_app.androidVersion = app_details["androidVersion"]
+			db_app.release_date = app_details["released"]
+			db_app.genere = app_details["genre"]
+			screenshot_list = []
+			review_list = []
+			screenshot_count = 0
+			review_count = 0
 			try :
-				if screenshot['src'] :
-					screenshot_link_list.append(screenshot['src'])
+				for screenshot in app_details["screenshots"] :
+					screenshot_count +=1
+					if screenshot_count <= 3 :
+						screenshot_list.append(screenshot) 
+				db_app.screenshot_link_1 = screenshot_list[0]
+				db_app.screenshot_link_2 = screenshot_list[1]	
+				db_app.screenshot_link_3 = screenshot_list[2]
 			except :
-				screenshot_link_list.append(screenshot['data-src'])	
-			if count >=3 :
-				break
-		app.screenshot_link_1 = screenshot_link_list[0]
-		app.screenshot_link_2 = screenshot_link_list[1]
-		app.screenshot_link_3 = screenshot_link_list[2]
-		
-
-		description_tag = soup_2.find_all('meta',{'itemprop':"description"})[0]
-		app.description = description_tag["content"]
-		app.save()
+				pass
+			#pdb.set_trace()	
+			try :
+				
+				result_review ,continuation_token= reviews(google_id,count=3)
+				#pdb.set_trace()
+				for one in result_review :
+					review_list.append(one['content'])
+				db_app.review_1 = review_list[0]
+				db_app.review_2 = review_list[1]
+				db_app.review_3 = review_list[2]	
+					
+				#for one_review in result_review :
+					#print (one_review["content"])
+			except :
+			
+				pass		
+			db_app.save()		
+		except :
+			pass				
+			
 		
 			
 	return redirect("../") 
@@ -98,9 +110,9 @@ def scrape(request):
 
 
 	
-def duplicate_check(links):
+def duplicate_check(title):
 
-	duplicate_slugs = App.objects.filter(slug= str(links))
+	duplicate_slugs = App.objects.filter(title= str(title))
 	
 	try :
 		if str(duplicate_slugs[0]) == str(links) :
@@ -119,14 +131,13 @@ def duplicate_check(links):
 def details_view(request,object_id):
 	
 	app_specific = App.objects.get(id = object_id)
-
-	
-	context = {'item' : app_specific}
-	return render(request , "details_view.html", context = context)
+	return redirect(reverse('details_redirect') + '?app=%s' %(app_specific.google_play_id))
 
 
 
-def details_redirect(request):
+
+def details_redirect(request ):
+	print("Inside the details_redirect request")
 	
 	url_parameter = request.GET.get("app")
 	app_specific = App.objects.get(google_play_id = url_parameter)
